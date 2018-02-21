@@ -38,12 +38,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SearchPanel.SuspendLayout();
             this.searchResultPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // SearchPanel
@@ -59,7 +57,6 @@
             // 
             // searchResultPnl
             // 
-            this.searchResultPnl.Controls.Add(this.pictureBox2);
             this.searchResultPnl.Controls.Add(this.label3);
             this.searchResultPnl.Controls.Add(this.label4);
             this.searchResultPnl.Controls.Add(this.label2);
@@ -157,14 +154,6 @@
             this.label4.Text = "Dragon Ball Z Special 1: Tatta Hitori no Saishuu Kessen - Freezer ni Idonda Z Sen" +
     "shi Son Goku no Chi";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(0, 304);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(226, 109);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            // 
             // AnimeScrapper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,7 +171,6 @@
             this.searchResultPnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sampleImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,7 +187,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
