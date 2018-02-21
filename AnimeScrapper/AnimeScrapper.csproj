@@ -69,7 +69,9 @@
       <DependentUpon>AnimeScrapper.cs</DependentUpon>
     </Compile>
     <Compile Include="AnimeSites\AnimeHeaven.cs" />
+    <Compile Include="DeleteThisInTheFuture.cs" />
     <Compile Include="Helper\ScrappingVariable.cs" />
+    <Compile Include="Helper\UI\Drawing.cs" />
     <Compile Include="Models\AnimeInformation.cs" />
     <Compile Include="Models\ScrapeResult.cs" />
     <Compile Include="Program.cs" />

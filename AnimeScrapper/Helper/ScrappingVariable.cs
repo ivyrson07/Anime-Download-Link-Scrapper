@@ -15,11 +15,23 @@ namespace AnimeScrapper.Helper
         protected static List<string> genres = new List<string>();
         protected static List<string> titles = new List<string>();
 
+        #region ClearAll
+
+        protected static void ClearAll()
+        {
+            htmlDocument = new HtmlDocument();
+            animeUrls = new List<string>();
+            coverImageUrls = new List<string>();
+            genres = new List<string>();
+            titles = new List<string>();
+        }
+
+        #endregion
+
         #region LoadHtmlDocument
 
         protected static void LoadHtmlDocument(string htmlContent)
         {
-            htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(htmlContent);
         }
 

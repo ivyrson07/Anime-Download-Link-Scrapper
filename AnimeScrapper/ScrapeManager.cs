@@ -49,7 +49,18 @@ namespace AnimeScrapper
 
         public static string RestfulWatch { get; set; }
 
-        public static ScrapeResult ScrapeResult { get; set; }
+        private static ScrapeResult _sr;
+
+        public static ScrapeResult ScrapeResult
+        {
+            get
+            {
+                if (_sr == null)
+                    _sr = new ScrapeResult();
+
+                return _sr;
+            }
+        }
 
         #region CreateRequest
 
@@ -62,12 +73,14 @@ namespace AnimeScrapper
 
         #region GetAnimeList
 
-        public static void GetAnimeList(AnimeSite site, string htmlContent)
+        public static List<AnimeInformation> GetAnimeList(AnimeSite site, string htmlContent)
         {
+            Tuple<ScrapeResult, List<AnimeInformation>> result = null;
+
             switch (site)
             {
                 case AnimeSite.AnimeHeaven:
-                    AnimeHeaven.ScrapeAnimeList(htmlContent);
+                    result = AnimeHeaven.ScrapeAnimeList(htmlContent);
                     break;
 
                 case AnimeSite.AnimeMobile:
@@ -82,6 +95,12 @@ namespace AnimeScrapper
                 default:
                     break;
             }
+
+            if (result.Item1.Success)
+            {
+                return result.Item2;
+            }
+            else return new List<AnimeInformation>();
         }
 
         #endregion
