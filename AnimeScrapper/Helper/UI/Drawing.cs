@@ -17,6 +17,7 @@ namespace AnimeScrapper.Helper.UI
         {
             Panel panel = searchResultPnl;
             List<Image> img = new List<Image>();
+            AnimeScrapper.AnimeListControls = new List<Control>();
 
             foreach (var imgUrl in infoList.Select(x => x.CoverImageUrl))
             {
@@ -33,38 +34,56 @@ namespace AnimeScrapper.Helper.UI
             {
                 PictureBox pb = new PictureBox();
                 pb.Tag = info.AnimeUrl;
+                pb.Name = "[Image]" + info.AnimeUrl;
                 pb.Size = new Size(226, 109);
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                 pb.Location = new Point(0, locationY);
                 pb.Image = img[ctr];
+                pb.Cursor = Cursors.Hand;
+                pb.Click += AnimeScrapper.AnimeList_Clicked;
+                pb.MouseMove += AnimeScrapper.AnimeList_MouseMove;
+                pb.MouseLeave += AnimeScrapper.AnimeList_MouseLeave;
 
                 panel.Controls.Add(pb);
 
                 Label titleLbl = new Label();
                 titleLbl.Text = info.Title;
                 titleLbl.Tag = info.AnimeUrl;
+                titleLbl.Name = "[Title]" + info.AnimeUrl;
                 titleLbl.Font = new Font("Microsoft Sans Serif", 14);
                 titleLbl.ForeColor = Color.White;
                 titleLbl.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
                 titleLbl.Dock = DockStyle.None;
                 titleLbl.AutoSize = true;
+                titleLbl.Cursor = Cursors.Hand;
                 titleLbl.MaximumSize = new Size(360, 77);
                 titleLbl.Location = new Point(232, locationY);
+                titleLbl.Click += AnimeScrapper.AnimeList_Clicked;
+                titleLbl.MouseMove += AnimeScrapper.AnimeList_MouseMove;
+                titleLbl.MouseLeave += AnimeScrapper.AnimeList_MouseLeave;
 
                 panel.Controls.Add(titleLbl);
 
                 Label genreLbl = new Label();
                 genreLbl.Text = info.Genre;
                 genreLbl.Tag = info.AnimeUrl;
+                genreLbl.Name = "[Genre]" + info.AnimeUrl;
                 genreLbl.Font = new Font("Microsoft Sans Serif", 8);
                 genreLbl.ForeColor = Color.White;
+                genreLbl.Cursor = Cursors.Hand;
                 genreLbl.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
                 genreLbl.Dock = DockStyle.None;
                 genreLbl.Size = new Size(378, 29);
                 int genreLblLocationY = locationY + titleLbl.Height + 6;
                 genreLbl.Location = new Point(232, genreLblLocationY);
+                genreLbl.Click += AnimeScrapper.AnimeList_Clicked;
+                genreLbl.MouseMove += AnimeScrapper.AnimeList_MouseMove;
+                genreLbl.MouseLeave += AnimeScrapper.AnimeList_MouseLeave;
 
                 panel.Controls.Add(genreLbl);
+                
+                AnimeScrapper.AnimeListControls.Add(titleLbl);
+                AnimeScrapper.AnimeListControls.Add(genreLbl);
 
                 ctr++;
                 locationY = locationY + 126;

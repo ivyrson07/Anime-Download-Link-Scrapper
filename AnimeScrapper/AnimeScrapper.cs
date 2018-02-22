@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AnimeScrapper.Helper.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,13 @@ namespace AnimeScrapper
 {
     public partial class AnimeScrapper : Form
     {
+        private static PictureBox pb;
+        private static Label title;
+        private static Label genre;
+        private static string animeUrl;
+
+        public static List<Control> AnimeListControls { get; set; }
+
         public AnimeScrapper()
         {
             InitializeComponent();
@@ -27,6 +35,39 @@ namespace AnimeScrapper
             searchResultPnl.HorizontalScroll.Maximum = 0;
             searchResultPnl.AutoScroll = true;
         }
+
+        #region Shared Event - Anime List Selection
+
+        public static void AnimeList_Clicked(object sender, EventArgs e)
+        {
+            animeUrl = ((Control)sender).Tag.ToString();
+
+            MessageBox.Show(animeUrl);
+        }
+
+        public static void AnimeList_MouseMove(object sender, MouseEventArgs e)
+        {
+            animeUrl = ((Control)sender).Tag.ToString();
+
+            title = (Label)(AnimeListControls.Where(x => x.Name == "[Title]" + animeUrl).First());
+            genre = (Label)(AnimeListControls.Where(x => x.Name == "[Genre]" + animeUrl).First());
+
+            UIControl.HoverOnLabel(title);
+            UIControl.HoverOnLabel(genre);
+        }
+
+        public static void AnimeList_MouseLeave(object sender, EventArgs e)
+        {
+            animeUrl = ((Control)sender).Tag.ToString();
+
+            title = (Label)(AnimeListControls.Where(x => x.Name == "[Title]" + animeUrl).First());
+            genre = (Label)(AnimeListControls.Where(x => x.Name == "[Genre]" + animeUrl).First());
+
+            UIControl.PlainOnLabel(title);
+            UIControl.PlainOnLabel(genre);
+        }
+
+        #endregion
 
         #region Search Tb
 
