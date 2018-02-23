@@ -111,7 +111,6 @@
   <ItemGroup>
     <Content Include="icon.ico" />
     <Content Include="MetroFramework.txt" />
-    <Content Include="sampleLogo_131638415111631854.ico" />
     <None Include="Resources\noImage.png" />
     <None Include="Resources\sampleLogo.png" />
   </ItemGroup>
