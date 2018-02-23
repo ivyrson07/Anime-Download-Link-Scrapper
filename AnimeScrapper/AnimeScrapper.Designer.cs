@@ -35,14 +35,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.sampleImg = new System.Windows.Forms.PictureBox();
-            this.logoLbl = new System.Windows.Forms.Label();
             this.searchTb = new MetroFramework.Controls.MetroTextBox();
             this.AnimeInformationPanel = new System.Windows.Forms.Panel();
             this.goBackBtn = new MetroFramework.Controls.MetroButton();
             this.yearReleasedLbl = new System.Windows.Forms.Label();
-            this.coverImagePb = new System.Windows.Forms.PictureBox();
             this.statusLbl = new System.Windows.Forms.Label();
             this.descriptionLbl = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -52,11 +48,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.nextBtn = new MetroFramework.Controls.MetroButton();
             this.displayImagesChk = new MetroFramework.Controls.MetroCheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.sampleImg = new System.Windows.Forms.PictureBox();
+            this.logoLbl = new System.Windows.Forms.Label();
+            this.coverImagePb = new System.Windows.Forms.PictureBox();
             this.SearchPanel.SuspendLayout();
             this.searchResultPnl.SuspendLayout();
+            this.AnimeInformationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleImg)).BeginInit();
-            this.AnimeInformationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coverImagePb)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,32 +134,6 @@
             this.label1.Text = "Dragon Ball Z Special 1: Tatta Hitori no Saishuu Kessen - Freezer ni Idonda Z Sen" +
     "shi Son Goku no Chi";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 126);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(226, 109);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // sampleImg
-            // 
-            this.sampleImg.BackColor = System.Drawing.Color.White;
-            this.sampleImg.Location = new System.Drawing.Point(0, 0);
-            this.sampleImg.Name = "sampleImg";
-            this.sampleImg.Size = new System.Drawing.Size(226, 109);
-            this.sampleImg.TabIndex = 3;
-            this.sampleImg.TabStop = false;
-            // 
-            // logoLbl
-            // 
-            this.logoLbl.Image = global::AnimeScrapper.Properties.Resources.sampleLogo;
-            this.logoLbl.Location = new System.Drawing.Point(21, 32);
-            this.logoLbl.Name = "logoLbl";
-            this.logoLbl.Size = new System.Drawing.Size(48, 32);
-            this.logoLbl.TabIndex = 1;
-            // 
             // searchTb
             // 
             this.searchTb.FontSize = MetroFramework.MetroTextBoxSize.Tall;
@@ -209,16 +183,6 @@
             this.yearReleasedLbl.Size = new System.Drawing.Size(613, 24);
             this.yearReleasedLbl.TabIndex = 27;
             this.yearReleasedLbl.Text = "2018";
-            // 
-            // coverImagePb
-            // 
-            this.coverImagePb.BackColor = System.Drawing.Color.White;
-            this.coverImagePb.Location = new System.Drawing.Point(16, 113);
-            this.coverImagePb.Name = "coverImagePb";
-            this.coverImagePb.Size = new System.Drawing.Size(285, 169);
-            this.coverImagePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.coverImagePb.TabIndex = 19;
-            this.coverImagePb.TabStop = false;
             // 
             // statusLbl
             // 
@@ -318,6 +282,42 @@
             this.displayImagesChk.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.displayImagesChk.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 126);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(226, 109);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // sampleImg
+            // 
+            this.sampleImg.BackColor = System.Drawing.Color.White;
+            this.sampleImg.Location = new System.Drawing.Point(0, 0);
+            this.sampleImg.Name = "sampleImg";
+            this.sampleImg.Size = new System.Drawing.Size(226, 109);
+            this.sampleImg.TabIndex = 3;
+            this.sampleImg.TabStop = false;
+            // 
+            // logoLbl
+            // 
+            this.logoLbl.Image = global::AnimeScrapper.Properties.Resources.sampleLogo;
+            this.logoLbl.Location = new System.Drawing.Point(21, 32);
+            this.logoLbl.Name = "logoLbl";
+            this.logoLbl.Size = new System.Drawing.Size(48, 32);
+            this.logoLbl.TabIndex = 1;
+            // 
+            // coverImagePb
+            // 
+            this.coverImagePb.BackColor = System.Drawing.Color.White;
+            this.coverImagePb.Location = new System.Drawing.Point(16, 113);
+            this.coverImagePb.Name = "coverImagePb";
+            this.coverImagePb.Size = new System.Drawing.Size(285, 169);
+            this.coverImagePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.coverImagePb.TabIndex = 19;
+            this.coverImagePb.TabStop = false;
+            // 
             // AnimeScrapper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,6 +327,7 @@
             this.Controls.Add(this.SearchPanel);
             this.Controls.Add(this.AnimeInformationPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AnimeScrapper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -334,9 +335,9 @@
             this.SearchPanel.ResumeLayout(false);
             this.searchResultPnl.ResumeLayout(false);
             this.searchResultPnl.PerformLayout();
+            this.AnimeInformationPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleImg)).EndInit();
-            this.AnimeInformationPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.coverImagePb)).EndInit();
             this.ResumeLayout(false);
 
