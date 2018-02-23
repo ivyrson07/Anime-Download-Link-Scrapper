@@ -50,6 +50,12 @@ namespace AnimeScrapper
             searchResultPnl.HorizontalScroll.Maximum = 0;
             searchResultPnl.AutoScroll = true;
 
+            //epToBeScrappedPnl.AutoScroll = false;
+            //epToBeScrappedPnl.HorizontalScroll.Enabled = false;
+            //epToBeScrappedPnl.HorizontalScroll.Visible = false;
+            //epToBeScrappedPnl.HorizontalScroll.Maximum = 0;
+            //epToBeScrappedPnl.AutoScroll = true;
+
             a = this;
         }
 
@@ -104,7 +110,7 @@ namespace AnimeScrapper
 
         #region Anime Information > Go Back Btn
 
-        private void goBackBtn_Click(object sender, EventArgs e)
+        private void animeInfoGoBackBtn_Click(object sender, EventArgs e)
         {
             SearchPanel.BringToFront();
         }
@@ -115,7 +121,16 @@ namespace AnimeScrapper
 
         private void nextBtn_Click(object sender, EventArgs e)
         {
+            ScrapePanel.BringToFront();
+        }
 
+        #endregion
+
+        #region Scrape > Go Back Btn
+
+        private void scrapeGoBackBtn_Click(object sender, EventArgs e)
+        {
+            AnimeInformationPanel.BringToFront();
         }
 
         #endregion
