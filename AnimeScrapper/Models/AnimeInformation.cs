@@ -10,7 +10,11 @@ namespace AnimeScrapper.Models
     {
         public string AnimeUrl { get; set; }
 
+        public System.Drawing.Image CoverImage { get; set; }
+
         public string CoverImageUrl { get; set; }
+
+        public string Description { get; set; }
 
         public int EpisodeCount { get; set; }
 

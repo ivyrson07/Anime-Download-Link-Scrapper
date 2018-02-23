@@ -20,6 +20,7 @@ namespace AnimeScrapper
         private static Label title;
         private static Label genre;
         private static string animeUrl;
+        private static AnimeScrapper a;
 
         public static List<Control> AnimeListControls { get; set; }
 
@@ -34,6 +35,8 @@ namespace AnimeScrapper
             searchResultPnl.HorizontalScroll.Visible = false;
             searchResultPnl.HorizontalScroll.Maximum = 0;
             searchResultPnl.AutoScroll = true;
+
+            a = this;
         }
 
         #region Shared Event - Anime List Selection
@@ -42,7 +45,23 @@ namespace AnimeScrapper
         {
             animeUrl = ((Control)sender).Tag.ToString();
 
-            MessageBox.Show(animeUrl);
+            pb = (PictureBox)(AnimeListControls.Where(x => x.Name == "[Image]" + animeUrl).First());
+            title = (Label)(AnimeListControls.Where(x => x.Name == "[Title]" + animeUrl).First());
+            genre = (Label)(AnimeListControls.Where(x => x.Name == "[Genre]" + animeUrl).First());
+
+            ScrapeManager.CreateRequest(animeUrl);
+
+            Drawing.DisplayAnimeInformation(
+                ScrapeManager.GetAnimeInformation(AnimeSite.AnimeHeaven, ScrapeManager.ResponseInHtmlFormat,
+                    title.Text, genre.Text, pb.Image),
+                a.titleLbl,
+                a.descriptionLbl,
+                a.genreLbl,
+                a.statusLbl,
+                a.yearReleasedLbl,
+                a.coverImagePb,
+                a.AnimeInformationPanel
+            );
         }
 
         public static void AnimeList_MouseMove(object sender, MouseEventArgs e)
@@ -69,14 +88,32 @@ namespace AnimeScrapper
 
         #endregion
 
-        #region Search Tb
+        #region Anime Information > Go Back Btn
+
+        private void goBackBtn_Click(object sender, EventArgs e)
+        {
+            SearchPanel.BringToFront();
+        }
+
+        #endregion
+
+        #region Anime Information > Next Btn
+
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region Search > Search Tb
 
         private void searchTb_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
                 string keyword = searchTb.Text;
-                string searchThis = string.Format(ScrapeManager.RestfulSearch, keyword);
+                string searchThis = string.Format(ScrapeManager.SearchLink, keyword);
 
                 ScrapeManager.CreateRequest(searchThis);
                 var list = ScrapeManager.GetAnimeList(AnimeSite.AnimeHeaven, ScrapeManager.ResponseInHtmlFormat);

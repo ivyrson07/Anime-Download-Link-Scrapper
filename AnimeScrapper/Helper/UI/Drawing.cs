@@ -11,6 +11,23 @@ namespace AnimeScrapper.Helper.UI
 {
     public class Drawing
     {
+        #region DisplayAnimeInformation
+
+        public static void DisplayAnimeInformation(AnimeInformation info, Label titleLbl, Label descriptionLbl,
+            Label genreLbl, Label statusLbl, Label yearReleasedLbl, PictureBox coverImagePb, Panel animeInfoPnl)
+        {
+            titleLbl.Text = info.Title.ToUpper();
+            descriptionLbl.Text = info.Description;
+            genreLbl.Text = info.Genre;
+            statusLbl.Text = info.Status;
+            yearReleasedLbl.Text = info.YearReleased.ToString();
+            coverImagePb.Image = info.CoverImage;
+
+            animeInfoPnl.BringToFront();
+        }
+
+        #endregion
+
         #region DisplaySearchedAnimeList
 
         public static void DisplaySearchedAnimeList(List<AnimeInformation> infoList, Panel searchResultPnl)
@@ -81,7 +98,8 @@ namespace AnimeScrapper.Helper.UI
                 genreLbl.MouseLeave += AnimeScrapper.AnimeList_MouseLeave;
 
                 panel.Controls.Add(genreLbl);
-                
+
+                AnimeScrapper.AnimeListControls.Add(pb);
                 AnimeScrapper.AnimeListControls.Add(titleLbl);
                 AnimeScrapper.AnimeListControls.Add(genreLbl);
 

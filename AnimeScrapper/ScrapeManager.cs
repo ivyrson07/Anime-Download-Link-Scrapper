@@ -45,9 +45,7 @@ namespace AnimeScrapper
             }
         }
 
-        public static string RestfulSearch { get; set; }
-
-        public static string RestfulWatch { get; set; }
+        public static string SearchLink { get; set; }
 
         private static ScrapeResult _sr;
 
@@ -62,11 +60,52 @@ namespace AnimeScrapper
             }
         }
 
+        public static string WatchLink { get; set; }
+
         #region CreateRequest
 
         public static void CreateRequest(string request)
         {
             Request = (HttpWebRequest)WebRequest.Create(request);
+        }
+
+        #endregion
+
+        #region GetAnimeInformation
+
+        public static AnimeInformation GetAnimeInformation(AnimeSite site, string htmlContent, string animeTitle = "", 
+            string animeGenre = "", System.Drawing.Image animeCoverImage = null)
+        {
+            Tuple<ScrapeResult, AnimeInformation> result = null;
+
+            switch (site)
+            {
+                case AnimeSite.AnimeHeaven:
+                    result = AnimeHeaven.ScrapeAnimeInformation(htmlContent);
+                    break;
+
+                case AnimeSite.AnimeMobile:
+                    break;
+
+                case AnimeSite.ChiaAnime:
+                    break;
+
+                case AnimeSite.GogoAnime:
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (result.Item1.Success)
+            {
+                result.Item2.CoverImage = animeCoverImage;
+                result.Item2.Genre = animeGenre;
+                result.Item2.Title = animeTitle;
+
+                return result.Item2;
+            }
+            else return new AnimeInformation();
         }
 
         #endregion
@@ -112,8 +151,8 @@ namespace AnimeScrapper
             switch (site)
             {
                 case AnimeSite.AnimeHeaven:
-                    RestfulSearch = @"http://animeheaven.eu/search.php?q={0}";
-                    RestfulWatch = @"http://animeheaven.eu/watch.php?a={0}&e={1}";
+                    SearchLink = @"http://animeheaven.eu/search.php?q={0}";
+                    WatchLink = @"http://animeheaven.eu/watch.php?a={0}&e={1}";
                     break;
 
                 case AnimeSite.AnimeMobile:

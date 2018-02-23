@@ -10,6 +10,37 @@ namespace AnimeScrapper.AnimeSites
 {
     public class AnimeHeaven : Helper.ScrappingVariable
     {
+        #region ScrapeAnimeInformation
+
+        public static Tuple<ScrapeResult, AnimeInformation> ScrapeAnimeInformation(string htmlContent)
+        {
+            try
+            {
+                LoadHtmlDocument(htmlContent);
+
+                AnimeInformation info = new AnimeInformation();
+
+                var elements = htmlDocument.DocumentNode.SelectNodes("//html//body//div[@class='notmain']//div[@class='maindark']//div[@class='infobox']//div[@class='infoboxc']//div[@class='infodesbox']");
+
+                info.Description = elements.Select(x => x.SelectSingleNode("//div[@class='infodes2']")).First().InnerHtml;
+                info.Status = elements.Select(x => x.SelectSingleNode("//div[@class='infodes2']")).Last().SelectNodes("//div[@class='textd']")[2].NextSibling.InnerHtml;
+                info.EpisodeCount = Convert.ToInt32(htmlDocument.DocumentNode.SelectNodes("//html//body//div[@class='notmain']//div[@class='maindark']//div[@class='infobox']//div[@class='infoepboxmain']//div[@class='infoepbox']//a//div//div//div//div")[3].InnerHtml);
+                info.YearReleased = Convert.ToInt32(elements.Select(x => x.SelectSingleNode("//div[@class='infodes2']")).Last().SelectNodes("//div[@class='textd']")[4].NextSibling.InnerHtml.Substring(0, 4));
+
+                ScrapeManager.ScrapeResult.Message = "Successfully scrapped anime information";
+                ScrapeManager.ScrapeResult.Success = true;
+                return new Tuple<ScrapeResult, AnimeInformation>(ScrapeManager.ScrapeResult, info);
+            }
+            catch (Exception e)
+            {
+                ScrapeManager.ScrapeResult.Message = e.Message;
+                ScrapeManager.ScrapeResult.Success = false;
+                return new Tuple<ScrapeResult, AnimeInformation>(ScrapeManager.ScrapeResult, new AnimeInformation());
+            }
+        }
+
+        #endregion
+
         #region ScrapeAnimeList
 
         public static Tuple<ScrapeResult, List<AnimeInformation>> ScrapeAnimeList(string htmlContent)
