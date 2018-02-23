@@ -51,6 +51,7 @@
             this.genreLbl = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.nextBtn = new MetroFramework.Controls.MetroButton();
+            this.displayImagesChk = new MetroFramework.Controls.MetroCheckBox();
             this.SearchPanel.SuspendLayout();
             this.searchResultPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -62,6 +63,7 @@
             // SearchPanel
             // 
             this.SearchPanel.BackColor = System.Drawing.Color.Transparent;
+            this.SearchPanel.Controls.Add(this.displayImagesChk);
             this.SearchPanel.Controls.Add(this.searchResultPnl);
             this.SearchPanel.Controls.Add(this.logoLbl);
             this.SearchPanel.Controls.Add(this.searchTb);
@@ -300,6 +302,22 @@
             this.nextBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
             // 
+            // displayImagesChk
+            // 
+            this.displayImagesChk.Checked = true;
+            this.displayImagesChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.displayImagesChk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.displayImagesChk.FontSize = MetroFramework.MetroLinkSize.Tall;
+            this.displayImagesChk.FontWeight = MetroFramework.MetroLinkWeight.Bold;
+            this.displayImagesChk.Location = new System.Drawing.Point(571, 31);
+            this.displayImagesChk.Name = "displayImagesChk";
+            this.displayImagesChk.Size = new System.Drawing.Size(165, 35);
+            this.displayImagesChk.Style = MetroFramework.MetroColorStyle.Red;
+            this.displayImagesChk.TabIndex = 4;
+            this.displayImagesChk.Text = "Display Images";
+            this.displayImagesChk.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.displayImagesChk.UseVisualStyleBackColor = true;
+            // 
             // AnimeScrapper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -348,6 +366,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label genreLbl;
         private System.Windows.Forms.Label label8;
+        private MetroFramework.Controls.MetroCheckBox displayImagesChk;
     }
 }
 

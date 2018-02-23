@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\noImage.png" />
     <None Include="Resources\sampleLogo.png" />
   </ItemGroup>
   <ItemGroup />

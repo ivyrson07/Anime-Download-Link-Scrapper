@@ -24,6 +24,20 @@ namespace AnimeScrapper
 
         public static List<Control> AnimeListControls { get; set; }
 
+        #region CreateParams
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParam = base.CreateParams;
+                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
+                return handleParam;
+            }
+        }
+
+        #endregion
+
         public AnimeScrapper()
         {
             InitializeComponent();
@@ -118,11 +132,9 @@ namespace AnimeScrapper
                 ScrapeManager.CreateRequest(searchThis);
                 var list = ScrapeManager.GetAnimeList(AnimeSite.AnimeHeaven, ScrapeManager.ResponseInHtmlFormat);
 
-                Helper.UI.Drawing.DisplaySearchedAnimeList(list, searchResultPnl);
+                Helper.UI.Drawing.DisplaySearchedAnimeList(list, searchResultPnl, displayImagesChk.Checked);
 
                 searchTb.Text = "";
-                //Thread.CurrentThread.Interrupt();
-                //Thread.CurrentThread.Start();
             }
         }
 

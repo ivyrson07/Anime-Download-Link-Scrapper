@@ -30,16 +30,27 @@ namespace AnimeScrapper.Helper.UI
 
         #region DisplaySearchedAnimeList
 
-        public static void DisplaySearchedAnimeList(List<AnimeInformation> infoList, Panel searchResultPnl)
+        public static void DisplaySearchedAnimeList(List<AnimeInformation> infoList, Panel searchResultPnl, 
+            bool displayImages)
         {
             Panel panel = searchResultPnl;
             List<Image> img = new List<Image>();
             AnimeScrapper.AnimeListControls = new List<Control>();
 
-            foreach (var imgUrl in infoList.Select(x => x.CoverImageUrl))
+            if (displayImages)
             {
-                ScrapeManager.CreateRequest(imgUrl);
-                img.Add(Image.FromStream(ScrapeManager.ResponseInMediaFileFormat));
+                foreach (var imgUrl in infoList.Select(x => x.CoverImageUrl))
+                {
+                    ScrapeManager.CreateRequest(imgUrl);
+                    img.Add(Image.FromStream(ScrapeManager.ResponseInMediaFileFormat));
+                }
+            }
+            else
+            {
+                for (int i = 0; i < infoList.Count; i++)
+                {
+                    img.Add(Properties.Resources.noImage);
+                }
             }
 
             int ctr = 0;
