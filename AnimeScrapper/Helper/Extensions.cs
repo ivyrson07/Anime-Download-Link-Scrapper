@@ -128,8 +128,11 @@ namespace AnimeScrapper.Helper
                     {
                         string[] rangeStr = iStr.Split('-');
 
-                        for (int i = rangeStr[0].ToInt(); i <= rangeStr[1].ToInt(); i++)
-                            epList.Add(i);
+                        if (rangeStr[0].ToInt() == 0)
+                            break;
+                        else
+                            for (int i = rangeStr[0].ToInt(); i <= rangeStr[1].ToInt(); i++)
+                                epList.Add(i);
                     }
                     else epList.Add(iStr.ToInt());
                 }
@@ -153,15 +156,18 @@ namespace AnimeScrapper.Helper
 
         public static string ToEpisodeText(this int?[] episodeList)
         {
+            bool fromConsecutive = false;
             string text = "";
             int ep = 0;
 
-            foreach (int episode in episodeList)
+            foreach (int episode in episodeList.OrderBy(x => x))
             {
                 if (ep == 0)
                     text = "- Episode " + episode;
                 else if (ep + 1 == episode)
                 {
+                    fromConsecutive = true;
+
                     if (episode == episodeList.Last())
                     {
                         text = text + " to Episode " + episode;
@@ -175,7 +181,12 @@ namespace AnimeScrapper.Helper
                 }
                 else
                 {
-                    text = text + " to Episode " + ep + "\n- Episode " + episode;
+                    if (fromConsecutive) 
+                        text = text + " to Episode " + ep + "\n- Episode " + episode;
+                    else
+                        text = text + "\n- Episode " + episode;
+
+                    fromConsecutive = false;
                 }
 
                 ep = episode;
