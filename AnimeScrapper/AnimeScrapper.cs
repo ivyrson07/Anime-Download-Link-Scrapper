@@ -1,4 +1,5 @@
-﻿using AnimeScrapper.Helper.UI;
+﻿using AnimeScrapper.Helper;
+using AnimeScrapper.Helper.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,18 +44,18 @@ namespace AnimeScrapper
             InitializeComponent();
 
             ScrapeManager.InitializeScrapper(AnimeSite.AnimeHeaven);
-
+            
             searchResultPnl.AutoScroll = false;
             searchResultPnl.HorizontalScroll.Enabled = false;
             searchResultPnl.HorizontalScroll.Visible = false;
             searchResultPnl.HorizontalScroll.Maximum = 0;
             searchResultPnl.AutoScroll = true;
 
-            //epToBeScrappedPnl.AutoScroll = false;
-            //epToBeScrappedPnl.HorizontalScroll.Enabled = false;
-            //epToBeScrappedPnl.HorizontalScroll.Visible = false;
-            //epToBeScrappedPnl.HorizontalScroll.Maximum = 0;
-            //epToBeScrappedPnl.AutoScroll = true;
+            epToBeScrappedPnl.AutoScroll = false;
+            epToBeScrappedPnl.HorizontalScroll.Enabled = false;
+            epToBeScrappedPnl.HorizontalScroll.Visible = false;
+            epToBeScrappedPnl.HorizontalScroll.Maximum = 0;
+            epToBeScrappedPnl.AutoScroll = true;
 
             a = this;
         }
@@ -79,6 +80,7 @@ namespace AnimeScrapper
                 a.genreLbl,
                 a.statusLbl,
                 a.yearReleasedLbl,
+                a.episodeCountLbl,
                 a.coverImagePb,
                 a.AnimeInformationPanel
             );
@@ -121,6 +123,12 @@ namespace AnimeScrapper
 
         private void nextBtn_Click(object sender, EventArgs e)
         {
+            maxEpisodeLbl.Text = "( Max - " + a.episodeCountLbl.Text + " )";
+            scrapeStatusLbl.Text = "";
+            scrapeEpisodeTextLbl.Text = "";
+            inputEpisodeTb.Text = "";
+            clipboardBtn.Enabled = false;
+            startScrappingBtn.Enabled = false;
             ScrapePanel.BringToFront();
         }
 
@@ -135,6 +143,16 @@ namespace AnimeScrapper
 
         #endregion
 
+        #region Scrape > Input Episode Tb
+
+        private void inputEpisodeTb_TextChanged(object sender, EventArgs e)
+        {
+            Helper.UI.Drawing.DisplayInputEpisodeClearText(epToBeScrappedPnl, startScrappingBtn, 
+                a.episodeCountLbl.Text.ToInt(), inputEpisodeTb.Text);
+        }
+
+        #endregion
+
         #region Search > Search Tb
 
         private void searchTb_KeyPress(object sender, KeyPressEventArgs e)
@@ -142,7 +160,7 @@ namespace AnimeScrapper
             if (e.KeyChar == (char)13)
             {
                 string keyword = searchTb.Text;
-                string searchThis = string.Format(ScrapeManager.SearchLink, keyword);
+                string searchThis = ScrapeManager.SearchLink.FormatString(keyword);
 
                 ScrapeManager.CreateRequest(searchThis);
                 var list = ScrapeManager.GetAnimeList(AnimeSite.AnimeHeaven, ScrapeManager.ResponseInHtmlFormat);

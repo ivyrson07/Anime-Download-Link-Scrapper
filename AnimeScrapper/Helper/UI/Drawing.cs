@@ -1,9 +1,11 @@
-﻿using AnimeScrapper.Models;
+﻿using AnimeScrapper.Helper;
+using AnimeScrapper.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,16 +16,53 @@ namespace AnimeScrapper.Helper.UI
         #region DisplayAnimeInformation
 
         public static void DisplayAnimeInformation(AnimeInformation info, Label titleLbl, Label descriptionLbl,
-            Label genreLbl, Label statusLbl, Label yearReleasedLbl, PictureBox coverImagePb, Panel animeInfoPnl)
+            Label genreLbl, Label statusLbl, Label yearReleasedLbl, Label episodeCountLbl, PictureBox coverImagePb, 
+            Panel animeInfoPnl)
         {
             titleLbl.Text = info.Title.ToUpper();
             descriptionLbl.Text = info.Description;
             genreLbl.Text = info.Genre;
             statusLbl.Text = info.Status;
             yearReleasedLbl.Text = info.YearReleased.ToString();
+            episodeCountLbl.Text = info.EpisodeCount.ToString();
             coverImagePb.Image = info.CoverImage;
 
             animeInfoPnl.BringToFront();
+        }
+
+        #endregion
+
+        #region DisplayInputEpisodeClearText
+
+        public static void DisplayInputEpisodeClearText(Panel epToBeScrappedPnl, Button startScrappingBtn, 
+            int maxEpisode, string input)
+        {
+            Panel panel = epToBeScrappedPnl;
+            Label lbl = new Label();
+            lbl.Font = new Font(new FontFamily("Microsoft Sans Serif"), 11);
+            lbl.ForeColor = Color.White;
+            lbl.AutoSize = true;
+            lbl.Location = new Point(8, 8);
+
+            int?[] fInput = input.ToEpisodeList(maxEpisode);
+            
+            if (fInput == null)
+            {
+                if (input.IsNullEmptyOrWhiteSpace())
+                    lbl.Text = "";
+                else
+                    lbl.Text = "Please check your input";
+
+                startScrappingBtn.Enabled = false;
+            }
+            else
+            {
+                lbl.Text = fInput.ToEpisodeText();
+                startScrappingBtn.Enabled = true;
+            }
+
+            panel.Controls.Clear();
+            panel.Controls.Add(lbl);
         }
 
         #endregion

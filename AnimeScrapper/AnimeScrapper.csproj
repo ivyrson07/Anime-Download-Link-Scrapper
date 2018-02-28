@@ -102,6 +102,7 @@
     <Compile Include="AnimeSites\AnimeHeaven.cs" />
     <Compile Include="DeleteThisInTheFuture.cs" />
     <Compile Include="Helper\ScrappingVariable.cs" />
+    <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\UI\UIControl.cs" />
     <Compile Include="Helper\UI\Drawing.cs" />
     <Compile Include="Models\AnimeInformation.cs" />
