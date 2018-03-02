@@ -21,6 +21,7 @@ namespace AnimeScrapper
         private static Label title;
         private static Label genre;
         private static string animeUrl;
+        private static Models.AnimeInformation selectedAnime;
         private static AnimeScrapper a;
 
         public static List<Control> AnimeListControls { get; set; }
@@ -72,9 +73,11 @@ namespace AnimeScrapper
 
             ScrapeManager.CreateRequest(animeUrl);
 
+            selectedAnime = ScrapeManager.GetAnimeInformation(AnimeSite.AnimeHeaven,
+                ScrapeManager.ResponseInHtmlFormat, title.Text, genre.Text, pb.Image);
+
             Drawing.DisplayAnimeInformation(
-                ScrapeManager.GetAnimeInformation(AnimeSite.AnimeHeaven, ScrapeManager.ResponseInHtmlFormat,
-                    title.Text, genre.Text, pb.Image),
+                selectedAnime,
                 a.titleLbl,
                 a.descriptionLbl,
                 a.genreLbl,
@@ -149,6 +152,25 @@ namespace AnimeScrapper
         {
             Helper.UI.Drawing.DisplayInputEpisodeClearText(epToBeScrappedPnl, startScrappingBtn, 
                 a.episodeCountLbl.Text.ToInt(), inputEpisodeTb.Text);
+        }
+
+        #endregion
+
+        #region Scrape > Start Scrapping Btn
+
+        private void startScrappingBtn_Click(object sender, EventArgs e)
+        {
+            int[] episodes = inputEpisodeTb.Text
+                .ToEpisodeList(selectedAnime.EpisodeCount)
+                .OrderBy(x => x)
+                .Cast<int>()
+                .ToArray();
+
+            ScrapeManager.GetDownloadLinks(
+                AnimeSite.AnimeHeaven,
+                episodes
+                    .ToWatchLinks(selectedAnime.Title)
+                    .ToHtmlContents());
         }
 
         #endregion

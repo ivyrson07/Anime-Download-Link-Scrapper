@@ -44,6 +44,11 @@ namespace AnimeScrapper.Helper
             return string.Format(input, keyword);
         }
 
+        public static string FormatString(this string input, string anime, int episode)
+        {
+            return string.Format(input, anime, episode);
+        }
+
         #endregion
 
         #region HasError
@@ -143,15 +148,6 @@ namespace AnimeScrapper.Helper
 
         #endregion
 
-        #region ToInt
-
-        public static int ToInt(this string input)
-        {
-            return Convert.ToInt32(input);
-        }
-
-        #endregion
-
         #region ToEpisodeText
 
         public static string ToEpisodeText(this int?[] episodeList)
@@ -181,7 +177,7 @@ namespace AnimeScrapper.Helper
                 }
                 else
                 {
-                    if (fromConsecutive) 
+                    if (fromConsecutive)
                         text = text + " to Episode " + ep + "\n- Episode " + episode;
                     else
                         text = text + "\n- Episode " + episode;
@@ -193,6 +189,48 @@ namespace AnimeScrapper.Helper
             }
 
             return text;
+        }
+
+        #endregion
+
+        #region ToHtmlContents
+
+        public static List<string> ToHtmlContents(this List<string> watchLinks)
+        {
+            List<string> htmlContents = new List<string>();
+            //GeckoWebBrowser b = new GeckoWebBrowser();
+
+            //foreach (string link in watchLinks)
+            //{
+            //    ScrapeManager.CreateRequest(link);
+            //    b.LoadHtml(ScrapeManager.ResponseInHtmlFormat);
+            //    GeckoDocument d = b.Document;
+            //}
+
+            return htmlContents;
+        }
+
+        #endregion
+
+        #region ToInt
+
+        public static int ToInt(this string input)
+        {
+            return Convert.ToInt32(input);
+        }
+
+        #endregion
+
+        #region ToWatchLinks
+
+        public static List<string> ToWatchLinks(this int[] episodes, string anime)
+        {
+            List<string> links = new List<string>();
+
+            foreach (int episode in episodes)
+                links.Add(ScrapeManager.WatchLink.FormatString(anime, episode));
+
+            return links;
         }
 
         #endregion

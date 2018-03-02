@@ -129,5 +129,34 @@ namespace AnimeScrapper.AnimeSites
         }
 
         #endregion
+
+        #region ScrapeDownloadLinks
+
+        public static Tuple<ScrapeResult, List<string>> ScrapeDownloadLinks(List<string> htmlContents)
+        {
+            try
+            {
+                List<string> downloadLinks = new List<string>();
+
+                foreach (string htmlContent in htmlContents)
+                {
+                    LoadHtmlDocument(htmlContent);
+
+                    var link = htmlDocument.DocumentNode.SelectNodes("//a[@class='an']");
+                }
+
+                ScrapeManager.ScrapeResult.Message = "Successfully scrapped anime information";
+                ScrapeManager.ScrapeResult.Success = true;
+                return new Tuple<ScrapeResult, List<string>>(ScrapeManager.ScrapeResult, downloadLinks);
+            }
+            catch (Exception e)
+            {
+                ScrapeManager.ScrapeResult.Message = e.Message;
+                ScrapeManager.ScrapeResult.Success = false;
+                return new Tuple<ScrapeResult, List<string>>(ScrapeManager.ScrapeResult, new List<string>());
+            }
+        }
+
+        #endregion
     }
 }

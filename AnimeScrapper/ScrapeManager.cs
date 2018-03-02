@@ -144,6 +144,40 @@ namespace AnimeScrapper
 
         #endregion
 
+        #region GetDownloadLinks
+
+        public static List<string> GetDownloadLinks(AnimeSite site, List<string> htmlContents)
+        {
+            Tuple<ScrapeResult, List<string>> result = null;
+
+            switch (site)
+            {
+                case AnimeSite.AnimeHeaven:
+                    result = AnimeHeaven.ScrapeDownloadLinks(htmlContents);
+                    break;
+
+                case AnimeSite.AnimeMobile:
+                    break;
+
+                case AnimeSite.ChiaAnime:
+                    break;
+
+                case AnimeSite.GogoAnime:
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (result.Item1.Success)
+            {
+                return result.Item2;
+            }
+            else return new List<string>();
+        }
+
+        #endregion
+
         #region InitializeScrapper
 
         public static void InitializeScrapper(AnimeSite site)

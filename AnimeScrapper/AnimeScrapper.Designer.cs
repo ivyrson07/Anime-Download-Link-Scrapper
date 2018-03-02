@@ -401,6 +401,7 @@
             this.startScrappingBtn.TabIndex = 26;
             this.startScrappingBtn.Text = "Start Scrapping";
             this.startScrappingBtn.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.startScrappingBtn.Click += new System.EventHandler(this.startScrappingBtn_Click);
             // 
             // clipboardBtn
             // 
